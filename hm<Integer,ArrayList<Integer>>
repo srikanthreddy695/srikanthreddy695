@@ -1,0 +1,28 @@
+import java.util.*;
+import java.io.*;
+public class Main{
+    public static void main(String[] args) throws java.lang.Exception{
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
+        int n=Integer.parseInt(br.readLine());
+        String[] x=br.readLine().split(" ");
+        int arr[]=new int[n];
+        for (int i=0;i<n;i++){
+            arr[i]=Integer.parseInt(x[i]);
+        }
+        HashMap<Integer,ArrayList<Integer>>hm =new HashMap<>();
+        int i=0;
+        for (int ele:arr){
+            if (hm.containsKey(ele)){
+                hm.get(ele).add(i);
+            }
+            else{
+                hm.put(ele,new ArrayList<>());
+                hm.get(ele).add(i);
+            }
+            i+=1;
+        }
+        bw.write(hm+"\n");
+        bw.flush();
+    }
+}

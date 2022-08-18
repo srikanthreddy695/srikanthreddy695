@@ -1,0 +1,36 @@
+import java.io.*;
+import java.util.*;
+class Node{
+    int data;
+    Node next;
+    Node prev;
+    Node(int a){
+        this.data=a;
+        this.next=null;
+        this.prev=null;
+    }
+}
+public class Main
+{
+    static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
+    static void print(Node root) throws IOException{
+        if(root==null) return;
+        print(root.next);
+        bw.write(root.data+" ");
+    }
+	public static void main(String[] args) throws IOException{
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		int n=Integer.parseInt(br.readLine());
+		String[] x=br.readLine().split(" ");
+		Node root=new Node(Integer.parseInt(x[0]));
+		Node temp=root;
+		for(int i=1;i<n;i++){
+		    int val=Integer.parseInt(x[i]);
+		    temp.next=new Node(val);
+		    temp=temp.next;
+		}
+		print(root);
+		bw.flush();
+	}
+}
+

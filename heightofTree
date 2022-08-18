@@ -1,0 +1,39 @@
+import java.util.*;
+import java.io.*;
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int s){
+        this.data=s;
+        this.left=null;
+        this.right=null;
+    }
+}
+public class Main
+{
+    static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
+    static Node insert(Node root,int val) throws java.lang.Exception{
+        if (root==null) return new Node(val);
+        if (root.data>val) root.left=insert(root.left,val);
+        else root.right=insert(root.right,val);
+        return root;
+    }
+    static int height(Node root) throws IOException{
+        if (root==null) return -1;
+        return Math.max(height(root.left),height(root.right))+1;
+    }
+	public static void main(String[] args)throws java.lang.Exception {
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        int n =Integer.parseInt(br.readLine());
+        Node root=null;
+        String[] s=br.readLine().split(" ");
+        for (int i=0;i<n;i++){
+            int val=Integer.parseInt(s[i]);
+            root=insert(root,val);
+        }
+        bw.write(height(root)+" ");
+        bw.flush();
+	}
+}
+

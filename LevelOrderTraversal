@@ -1,0 +1,49 @@
+import java.util.*;
+import java.io.*;
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int s){
+        this.data=s;
+        this.left=null;
+        this.right=null;
+    }
+}
+public class Main
+{
+    static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
+    static Node insert(Node root,int val) throws java.lang.Exception{
+        if (root==null) return new Node(val);
+        if (root.data>val) root.left=insert(root.left,val);
+        else root.right=insert(root.right,val);
+        return root;
+    }
+	public static void main(String[] args)throws java.lang.Exception {
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        int n =Integer.parseInt(br.readLine());
+        Node root=null;
+        String[] s=br.readLine().split(" ");
+        for (int i=0;i<n;i++){
+            int val=Integer.parseInt(s[i]);
+            root=insert(root,val);
+        }
+        Queue<Node> qs=new LinkedList<>();
+        Node temp=root;
+        qs.add(root);
+        while(!qs.isEmpty()){
+            int x=qs.size();
+            for (int p=0;p<x;p++){
+                temp=qs.poll();
+                if (temp==null) continue;
+                bw.write(temp.data+" ");
+                qs.offer(temp.left);
+                qs.offer(temp.right);
+            }
+            bw.write("\n");
+        }
+        bw.flush();
+	}
+}
+
+

@@ -1,0 +1,41 @@
+import java.text.*;
+import java.math.*;
+import java.lang.*;
+import java.util.*;
+import java.io.*;
+class Node{
+    int data;
+    int depth;
+    Node left;
+    Node right;
+    Node (int x,int y){
+        this.data=x;
+        this.depth=y;
+        this.left=null;
+        this.right=null;
+    }
+}
+public class Main{
+    static BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
+    static Node insert(Node root,int val,int dep) throws java.lang.Exception{
+        if (root==null){
+            bw.write(dep+" ");
+            return new Node(val,dep);
+        } 
+        if (root.data>val) root.left=insert(root.left,val,dep+1);
+        else root.right=insert(root.right,val,dep+1);
+        return root;
+    }
+    public static void main(String[] args) throws java.lang.Exception{
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        int n=Integer.parseInt(br.readLine());
+        String[] s=br.readLine().split(" ");
+        Node root=null;
+        for (int i=0;i<n;i++){
+            int val=Integer.parseInt(s[i]);
+            root=insert(root,val,0);    
+        }
+        bw.write("\n");
+        bw.flush();
+    }
+}

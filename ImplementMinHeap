@@ -1,0 +1,70 @@
+import java.io.*;
+import java.util.*;
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
+        int t=Integer.parseInt(br.readLine());
+        Heap hp=new Heap();
+        while(t-- >0){
+            StringTokenizer st=new StringTokenizer(br.readLine());
+            String s=st.nextToken();
+            switch(s){
+                case "insert":
+                    int a=Integer.parseInt(st.nextToken());
+                    hp.insert(a);
+                    break;
+                case "getMin":
+                    bw.write(hp.getMin());
+                    bw.write("\n");
+                    break;
+                case "delMin":
+                    hp.delMin();
+                    break;
+            }
+        }
+        bw.flush();
+    }
+}
+class Heap{
+    ArrayList<Integer> hp;
+    Heap(){
+        hp=new ArrayList<>();
+    }
+     public void insert(int ele){
+        hp.add(ele);
+        int idx=hp.size()-1;
+        while(((idx-1)/2)>=0 &&(hp.get(idx)<hp.get((idx-1)/2))){
+            int temp=hp.get(idx);
+            hp.set(idx,hp.get((idx-1)/2));
+            hp.set((idx-1)/2,temp);
+            idx=(idx-1)/2;
+        }
+    }
+    public void delMin(){
+        if(hp.size()==0){
+            return;
+        }
+        int n=hp.size();
+        hp.set(0,hp.get(n-1));
+        hp.remove(n-1);
+        int idx=0;
+        n=n-1;
+        while(2*idx+1<n){
+            int minIdx=idx;
+            if(hp.get(2*idx+1)<hp.get(minIdx))
+                minIdx=2*idx+1;
+            if(2*idx+2<n && hp.get(2*idx+2)<hp.get(minIdx))
+                minIdx=2*idx+2;
+            if(minIdx==idx)
+                return;
+            int temp=hp.get(minIdx);
+            hp.set(minIdx,hp.get(idx));
+            hp.set(idx,temp);
+            idx=minIdx;
+        }
+    }
+    public String getMin(){
+        return hp.size()!=0?hp.get(0)+"":"Empty";
+    }
+}

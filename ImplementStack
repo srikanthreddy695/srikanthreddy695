@@ -1,0 +1,12 @@
+l=[]
+for _ in range(int(input())):
+    a=input()
+    if len(a)>=6:
+        l.append(int(a[4:]))
+    else:
+        t=len(l)
+        if t>=1:
+            n=l.pop()
+            print(n)
+        else:
+            print("Empty")

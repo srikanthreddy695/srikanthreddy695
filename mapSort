@@ -1,0 +1,40 @@
+import java.util.*;
+import java.io.*;
+public class Main
+{
+	public static void main(String[] args) throws IOException
+	{
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
+		String arr[]=br.readLine().split(" ");
+		TreeMap<Integer,Integer>tm=new TreeMap<>();
+		for(String x:arr)
+		{
+		    int ele=Integer.parseInt(x);
+		    if (tm.containsKey(ele))
+		    {
+		        tm.put(ele,tm.get(ele)+1);
+		    }
+		    else
+		    {
+		        tm.put(ele,1);
+		    }
+		}
+		bw.write(tm+"\n");
+		/// In the Tree Map, we got the sorted order of the elements in O(N*LogN) T.C;
+		/// To store the resultant again in a proper manner it takes N time more
+		ArrayList<Integer>ans=new ArrayList<>();
+		for(int ele:tm.keySet())
+		{
+		    int cnt=tm.get(ele);
+		    while(cnt!=0)
+		    {
+		        ans.add(ele);
+		        cnt-=1;
+		    }
+		}
+		/// Finally the approach takes O(NLogN + N) T.C 
+		bw.write(ans+"\n");
+		bw.flush();
+	}
+}

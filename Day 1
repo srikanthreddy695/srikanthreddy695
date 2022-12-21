@@ -1,4 +1,4 @@
-DECIMAL TO BINARY
+----------DECIMAL TO BINARY----------
 x=10
 s=""
 while x!=0:
@@ -23,7 +23,7 @@ public class Main
 	}
 }
 --------------------------------------------------------
-BINARY TO DECIMAL
+----------BINARY TO DECIMAL----------
 s="10101"
 value=0
 n=len(s)

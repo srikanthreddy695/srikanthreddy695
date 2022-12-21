@@ -1,3 +1,4 @@
+DECIMAL TO BINARY
 x=10
 s=""
 while x!=0:
@@ -19,5 +20,32 @@ public class Main
 		    n=n/2;
 		}
 		System.out.print(sb);
+	}
+}
+--------------------------------------------------------
+BINARY TO DECIMAL
+s="10101"
+value=0
+n=len(s)
+temp=0
+for i in range(n-1,-1,-1):
+    value+=int(s[i])<<temp
+    temp+=1
+print(value)
+
+
+public class Main
+{
+	public static void main(String[] args) {
+		String s="10111";
+		int n=s.length();
+		int ans=0;
+		int temp=0;
+		for(int i=n-1;i>=0;i--){
+		    int k=s.charAt(i)-'0';
+		    ans+=k<<temp;
+		    temp+=1;
+		}
+		System.out.println(ans);
 	}
 }
